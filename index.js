@@ -25,6 +25,10 @@ const sever = {
       })
     );
 
+    app.get("/", (req, res) => {
+      res.send("Hello World!");
+    });
+
     routes(app);
 
     app.listen(port, () => {
