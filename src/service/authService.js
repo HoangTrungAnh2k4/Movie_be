@@ -95,6 +95,57 @@ const authService = {
       return { status: 500, message: "Internal Server Error" };
     }
   },
+
+  getUser: async (req, res) => {
+    let userInfor = null;
+
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.split(" ")[1];
+
+      try {
+        // veryfy token
+        const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+        userInfor = decode;
+      } catch (error) {
+        console.log(error);
+
+        return res
+          .status(401)
+          .json({ message: "Access_token is expired or invalid" });
+      }
+    } else {
+      return res
+        .status(401)
+        .json({ message: "Authorization header is missing" });
+    }
+
+    try {
+      const usersCollection = GET_DB().collection("users");
+
+      const user = await usersCollection.findOne({ email: userInfor.email });
+
+      if (!user) {
+        return {
+          status: 404,
+          message: "Người dùng không tồn tại.",
+        };
+      }
+
+      return {
+        status: 200,
+        data: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+      };
+    } catch (error) {
+      console.error("Database query error:", error);
+
+      return { status: 500, message: "Internal Server Error" };
+    }
+  },
 };
 
 export default authService;
