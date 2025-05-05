@@ -1,11 +1,10 @@
 import userRoute from "./userRoute.js";
 import authRoute from "./authRoute.js";
-// const adminRoutes = require("./adminRoute");
 
-// const auth = require("../middleware/auth");
+import auth from "../middleware/auth.js";
 
 const routes = (app) => {
-  app.use("/user/api", userRoute);
+  app.use("/user/api", auth, userRoute);
   app.use("/auth/api", authRoute);
 };
 

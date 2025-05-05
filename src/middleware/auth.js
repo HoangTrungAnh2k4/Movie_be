@@ -1,18 +1,18 @@
-import { verify } from "jsonwebtoken";
 import "dotenv";
+import jwt from "jsonwebtoken";
 
 const auth = (req, res, next) => {
+  console.log("Auth middleware is working");
+
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(" ")[1];
 
     try {
       // veryfy token
-      const decode = verify(token, process.env.JWT_SECRET);
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decode);
 
-      req.user = {
-        userInfor: decode,
-      };
+      req.user = decode;
 
       next();
     } catch (error) {

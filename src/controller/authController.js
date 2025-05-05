@@ -42,19 +42,6 @@ const authControllers = {
         .json({ error: err.message || "Internal Server Error" });
     }
   },
-
-  getUer: async (req, res) => {
-    try {
-      const result = await authService.getUser(req, res);
-      res
-        .status(result.status)
-        .json(result.message ? { message: result.message } : result.data);
-    } catch (err) {
-      res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal Server Error" });
-    }
-  },
 };
 
 export default authControllers;
