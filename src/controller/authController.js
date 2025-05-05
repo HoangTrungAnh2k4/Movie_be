@@ -42,6 +42,25 @@ const authControllers = {
         .json({ error: err.message || "Internal Server Error" });
     }
   },
+
+  getComment: async (req, res) => {
+    try {
+      const movieName = req.params.id;
+
+      if (!movieName) {
+        return res.status(400).json({ message: "Movie name is required" });
+      }
+
+      const result = await authService.getComment(movieName);
+      res
+        .status(result.status)
+        .json(result.message ? { message: result.message } : result.data);
+    } catch (err) {
+      res
+        .status(err.status || 500)
+        .json({ error: err.message || "Internal Server Error" });
+    }
+  },
 };
 
 export default authControllers;

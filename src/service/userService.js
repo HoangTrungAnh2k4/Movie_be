@@ -137,30 +137,6 @@ const userService = {
       return { status: 500, message: "Internal Server Error" };
     }
   },
-
-  getComment: async (movieName) => {
-    try {
-      const moviesCollection = GET_DB().collection("movies");
-
-      const movie = await moviesCollection.findOne({ name: movieName });
-
-      if (!movie) {
-        return {
-          status: 200,
-          data: [],
-        };
-      }
-
-      return {
-        status: 200,
-        data: movie,
-      };
-    } catch (error) {
-      console.error("Database query error:", error);
-
-      return { status: 500, message: "Internal Server Error" };
-    }
-  },
 };
 
 export default userService;
