@@ -11,6 +11,6 @@ export class User {
     @Column({ nullable: false })
     password: string;
 
-    @Column()
+    @Column('text', { array: true, default: [] })
     favoriteMovies: string[];
 }

@@ -26,6 +26,8 @@ export class AuthController {
     async createUser(
         @Body() userData: CreateUserDto,
     ): Promise<{ message: string }> {
+        console.log('userData', userData);
+
         return this.authService.createUser(userData);
     }
 
