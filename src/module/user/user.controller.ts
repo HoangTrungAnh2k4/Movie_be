@@ -17,7 +17,7 @@ export class UserController {
         return req.user;
     }
 
-    @Post('/add-favorite-movie/:movieName')
+    @Post('/favorite-movie/:movieName')
     addFavoriteMovie(@Request() req: any) {
         const userId = req.user.userId;
         const movieName = req.params.movieName;
