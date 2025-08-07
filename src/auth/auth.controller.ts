@@ -26,8 +26,6 @@ export class AuthController {
     async createUser(
         @Body() userData: CreateUserDto,
     ): Promise<{ message: string }> {
-        console.log('userData', userData);
-
         return this.authService.createUser(userData);
     }
 
@@ -37,6 +35,7 @@ export class AuthController {
     @Post('/login')
     async login(@Request() req: any): Promise<{ access_token: string }> {
         // this.logger.log(`User ${req.user.email} logged in`);
+
         return this.authService.login(req.user);
     }
 }

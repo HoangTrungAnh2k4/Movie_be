@@ -38,13 +38,16 @@ export class AuthService {
                 );
             }
 
-            throw error;
+            throw new HttpException(
+                'Failed to create user',
+                HttpStatus.INTERNAL_SERVER_ERROR,
+            );
         }
     }
 
     async login(user: User): Promise<{ access_token: string }> {
         const payload = {
-            sub: user.id,
+            userId: user.id,
             email: user.email,
         };
 

@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { Comment } from './entity/comment.entity';
 import { AuthModule } from './auth/auth.module';
+import { MovieModule } from './module/movie/movie.module';
 
 @Module({
     imports: [
@@ -27,6 +28,7 @@ import { AuthModule } from './auth/auth.module';
         }),
         UserModule,
         AuthModule,
+        MovieModule,
     ],
     controllers: [AppController],
     providers: [AppService],
